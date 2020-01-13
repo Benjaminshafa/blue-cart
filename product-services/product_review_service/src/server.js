@@ -22,24 +22,24 @@ client.connect(function(err,connection){
 
 var controller = require('./Controller');
 
-app.post('/product',function(req,res){
-    controller.insert_Product(mongodbConnection,req.body,function(mongoItem){
+app.post('/review',function(req,res){
+    controller.insert_review(mongodbConnection,req.body,function(mongoItem){
         if(mongoItem.insertedCount < 1){
             return res.status(200).send({"message": "failed!"});        
         }
         else{
-             return res.status(200).send({});        
+             return res.status(200).send();        
         }
     })
 });
 
-app.get('/product',function(req,res){
-    controller.retrieve_Product_By_Id(mongodbConnection,req.header.id,function(product_Info){
-        if(product_Info.insertedCount < 1){
+app.get('/review',function(req,res){
+    controller.retrieve_review_By_Product_Id(mongodbConnection,req.header.product_id,function(product_reviews){
+        if(product_reviews.insertedCount < 1){
             return res.status(200).send({"message": "failed!"});        
         }
         else{
-             return res.status(200).send({product_Info});        
+             return res.status(200).send({product_reviews});        
         }
     })
 });
