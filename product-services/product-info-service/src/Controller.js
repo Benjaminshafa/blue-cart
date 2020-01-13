@@ -1,13 +1,18 @@
 function insert_Product (db,product_info,callback){
-    // Get the documents collection
     var collection = db.collection('products');
-    // Insert some documents
     collection.insert(product_info, function(err, result) {
-            console.log("Inserted product successfully!");
+            callback(result);
+    });
+}
+
+function retrieve_Product_By_Id (db,product_id,callback){
+    var collection = db.collection('products');
+    collection.findOne(product_id, function(err, result) {
             callback(result);
     });
 }
 
 module.exports = {
-insert_Product: insert_Product
+insert_Product: insert_Product,
+retrieve_Product_By_Id: retrieve_Product_By_Id
 }
