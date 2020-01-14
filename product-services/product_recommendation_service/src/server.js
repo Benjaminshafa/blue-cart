@@ -22,8 +22,8 @@ client.connect(function(err,connection){
 
 var controller = require('./Controller');
 
-app.post('/review',function(req,res){
-    controller.insert_review(mongodbConnection,req.body,function(mongoItem){
+app.post('/recommendation',function(req,res){
+    controller.insert_recommendation(mongodbConnection,req.body,function(mongoItem){
         if(mongoItem.insertedCount < 1){
             return res.status(200).send({"message": "failed!"});        
         }
@@ -33,13 +33,13 @@ app.post('/review',function(req,res){
     })
 });
 
-app.get('/review',function(req,res){
-    controller.retrieve_review_By_Product_Id(mongodbConnection,req.header.product_id,function(product_reviews){
-        if(product_reviews.insertedCount < 1){
+app.get('/recommendation',function(req,res){
+    controller.retrieve_recommendation_by_product_id(mongodbConnection,req.header.product_id,function(recomendation_list){
+        if(recomendation_list.insertedCount < 1){
             return res.status(200).send({"message": "failed!"});        
         }
         else{
-             return res.status(200).send(product_reviews);        
+             return res.status(200).send(recomendation_list);        
         }
     })
 });
