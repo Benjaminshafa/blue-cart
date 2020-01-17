@@ -25,7 +25,7 @@ var controller = require('./Controller');
 app.post('/product',function(req,res){
     controller.insert_Product(mongodbConnection,req.body,function(mongoItem){
         if(mongoItem.insertedCount < 1){
-            return res.status(200).send({"message": "failed!"});        
+            return res.status(500).send({"message": "failed!"});        
         }
         else{
              return res.status(200).send({});        
@@ -36,7 +36,7 @@ app.post('/product',function(req,res){
 app.get('/product',function(req,res){
     controller.retrieve_Product_By_Id(mongodbConnection,req.header.id,function(product_Info){
         if(product_Info.insertedCount < 1){
-            return res.status(200).send({"message": "failed!"});        
+            return res.status(404).send({"message": "not found!"});        
         }
         else{
              return res.status(200).send({product_Info});        
