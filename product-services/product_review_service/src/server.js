@@ -25,7 +25,7 @@ var controller = require('./Controller');
 app.post('/review',function(req,res){
     controller.insert_review(mongodbConnection,req.body,function(mongoItem){
         if(mongoItem.insertedCount < 1){
-            return res.status(200).send({"message": "failed!"});        
+            return res.status(500).send({"message": "failed!"});        
         }
         else{
              return res.status(200).send();        
@@ -36,7 +36,7 @@ app.post('/review',function(req,res){
 app.get('/review',function(req,res){
     controller.retrieve_review_By_Product_Id(mongodbConnection,req.header.product_id,function(product_reviews){
         if(product_reviews.insertedCount < 1){
-            return res.status(200).send({"message": "failed!"});        
+            return res.status(404).send({"message": "not found!"});        
         }
         else{
              return res.status(200).send(product_reviews);        

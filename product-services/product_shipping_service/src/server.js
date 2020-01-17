@@ -12,7 +12,7 @@ var controller = require('./Controller');
 app.post('/shipping',function(req,res){
     controller.insert_shipping(req.body,function(result){
         if(result.affectedRows < 1){
-            return res.status(200).send({"message": "failed!"});        
+            return res.status(500).send({"message": "failed!"});        
         }
         else{
              return res.status(200).send();        
@@ -23,7 +23,7 @@ app.post('/shipping',function(req,res){
 app.get('/shipping',function(req,res){
     controller.retrieve_shipping(function(shippingList){
         if(!shippingList){
-            return res.status(200).send({"message": "failed!"});        
+            return res.status(404).send({"message": "not found!"});        
         }
         else{
              return res.status(200).send({shippingList});        

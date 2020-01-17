@@ -23,9 +23,9 @@ client.connect(function(err,connection){
 var controller = require('./Controller');
 
 app.post('/shopping_cart',function(req,res){
-    controller.insert_recommendation(mongodbConnection,req.body,function(mongoItem){
+    controller.insert_item_to_cart(mongodbConnection,req.body,function(mongoItem){
         if(mongoItem.insertedCount < 1){
-            return res.status(200).send({"message": "failed!"});        
+            return res.status(500).send({"message": "failed!"});        
         }
         else{
              return res.status(200).send();        
@@ -34,12 +34,12 @@ app.post('/shopping_cart',function(req,res){
 });
 
 app.get('/shopping_cart',function(req,res){
-    controller.retrieve_recommendation_by_product_id(mongodbConnection,req.header.product_id,function(recomendation_list){
-        if(recomendation_list.insertedCount < 1){
-            return res.status(200).send({"message": "failed!"});        
+    controller.retrieve_shopping_cart_by_customer_id(mongodbConnection,req.headers.customer_id,function(result){
+        if(!result){
+            return res.status(404).send({"message": "not found!"});        
         }
         else{
-             return res.status(200).send(recomendation_list);        
+             return res.status(200).send(result);        
         }
     })
 });

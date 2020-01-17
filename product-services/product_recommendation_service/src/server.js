@@ -25,7 +25,7 @@ var controller = require('./Controller');
 app.post('/recommendation',function(req,res){
     controller.insert_recommendation(mongodbConnection,req.body,function(mongoItem){
         if(mongoItem.insertedCount < 1){
-            return res.status(200).send({"message": "failed!"});        
+            return res.status(500).send({"message": "failed!"});        
         }
         else{
              return res.status(200).send();        
@@ -36,7 +36,7 @@ app.post('/recommendation',function(req,res){
 app.get('/recommendation',function(req,res){
     controller.retrieve_recommendation_by_product_id(mongodbConnection,req.header.product_id,function(recomendation_list){
         if(recomendation_list.insertedCount < 1){
-            return res.status(200).send({"message": "failed!"});        
+            return res.status(404).send({"message": "not found!"});        
         }
         else{
              return res.status(200).send(recomendation_list);        

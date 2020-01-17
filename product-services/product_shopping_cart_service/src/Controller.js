@@ -1,13 +1,13 @@
 function insert_item_to_cart (db,review_Object,callback){
-    var collection = db.collection('recommendation');
+    var collection = db.collection('shopping_cart');
     collection.insert(review_Object, function(err, result) {
             callback(result);
     });
 }
 
-function retrieve_shopping_cart_by_customer_id (db,product_id,callback){
-    var collection = db.collection('recommendation');
-    collection.findOne(product_id, function(err, result) {
+function retrieve_shopping_cart_by_customer_id (db,cId,callback){
+    var collection = db.collection('shopping_cart');
+    collection.findOne({"customer_Id":cId}, function(err, result) {
             callback(result);
     });
 }
