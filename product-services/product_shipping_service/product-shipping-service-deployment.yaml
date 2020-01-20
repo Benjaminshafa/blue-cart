@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-shipping-service-deployment
+  labels:
+    app: product-shipping-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: product-shipping-service
+  template:
+    metadata:
+      labels:
+        app: product-shipping-service
+    spec:
+      containers:
+      - name: product-shipping-service
+        image: benjaminsh/blue_cart_product_shipping_service:latest
+        ports:
+        - containerPort: 3000
