@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-review-service-deployment
+  labels:
+    app: product-review-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: product-review-service
+  template:
+    metadata:
+      labels:
+        app: product-review-service
+    spec:
+      containers:
+      - name: product-review-service
+        image: benjaminsh/blue_cart_product_review_service:latest
+        ports:
+        - containerPort: 3000

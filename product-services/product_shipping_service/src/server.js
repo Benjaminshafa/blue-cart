@@ -21,6 +21,7 @@ app.post('/shipping',function(req,res){
 });
 
 app.get('/shipping',function(req,res){
+    console.log('meoow');
     controller.retrieve_shipping(function(shippingList){
         if(!shippingList){
             return res.status(404).send({"message": "not found!"});        
