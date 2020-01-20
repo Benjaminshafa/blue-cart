@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-info-service-deployment
+  labels:
+    app: product-info-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: product-info-service
+  template:
+    metadata:
+      labels:
+        app: product-info-service
+    spec:
+      containers:
+      - name: product-info-service
+        image: benjaminsh/blue_cart_product_info_service:latest
+        ports:
+        - containerPort: 3000

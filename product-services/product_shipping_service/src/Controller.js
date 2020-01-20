@@ -1,7 +1,7 @@
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
- host     : 'shipping-service.mysql.database.azure.com',
- user     : 'blue_cart_admin@shipping-service',
+ host     : 'blue-cart.cgieg9vhodze.eu-central-1.rds.amazonaws.com',
+ user     : 'blue_cart_admin',
  password : 'QwertyMan500',
 //  database : 'shipping-service'
 });
@@ -10,32 +10,35 @@ function insert_shipping (shipping_object,callback){
     
 connection.connect();
  
-connection.query(`INSERT INTO shipping.shipping (Id, Shipping_mode, Shipping_cost, Shipping_duration) VALUES (UUID(), 'standard',2,5)`, function (error, results, fields) {
+connection.query(`INSERT INTO shipping.shipping (Id, Shipping_mode, Shipping_cost, Shipping_duration) VALUES (UUID(), 'express',6,2)`, function (error, results, fields) {
   if (error){
     throw error;
     console.log('The solution is: ', results[0].solution);
     }
     else{
+          connection.destroy();
         callback(results)
     }
 });
-connection.end();
+
 }
 
 function retrieve_shipping (callback){
-  connection.connect();
- 
+
+connection.connect(); 
 connection.query(`SELECT * from shipping.shipping`, function (error, results, fields) {
   if (error){
     throw error;
     console.log('The solution is: ', results[0].solution);
+    connection.destroy();
     }
     else{
+      connection.destroy();
         callback(results)
     }
 });
-connection.end();
 }
+
 
 module.exports = {
 insert_shipping: insert_shipping,

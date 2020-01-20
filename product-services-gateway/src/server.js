@@ -1,0 +1,1 @@
+console.log(process.env["GNOME_TERMINAL_SCREEN"]);
