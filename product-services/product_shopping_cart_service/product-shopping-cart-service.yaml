@@ -4,7 +4,7 @@ metadata:
   name: product-shopping-cart-service
 spec:
   selector:
-    app: product-shopping-cart-service-deployment
+    app: product-shopping-cart-service
   ports:
     - protocol: TCP
       port: 80
