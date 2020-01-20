@@ -34,8 +34,8 @@ app.post('/recommendation',function(req,res){
 });
 
 app.get('/recommendation',function(req,res){
-    controller.retrieve_recommendation_by_product_id(mongodbConnection,req.header.product_id,function(recomendation_list){
-        if(recomendation_list.insertedCount < 1){
+    controller.retrieve_recommendation_by_product_id(mongodbConnection,req.headers.product_id,function(recomendation_list){
+        if(!recomendation_list){
             return res.status(404).send({"message": "not found!"});        
         }
         else{

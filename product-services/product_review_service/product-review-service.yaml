@@ -4,7 +4,7 @@ metadata:
   name: product-review-service
 spec:
   selector:
-    app: product-review-service-deployment
+    app: product-review-service
   ports:
     - protocol: TCP
       port: 80
