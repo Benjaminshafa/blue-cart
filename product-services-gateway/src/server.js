@@ -11,7 +11,7 @@ app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 var controller = require('./Controller');
 
 app.get('/product_service_proxy',function(req,res){
-    controller.doTheMagic(req.headers.product_id,function(result){
+    controller.doTheMagic(req.headers.product_id,req.headers.customer_id,function(result){
         if(!result){
             return res.status(404).send({"message": "not found!"});        
         }
