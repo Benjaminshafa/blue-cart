@@ -5,9 +5,9 @@ function insert_review (db,review_Object,callback){
     });
 }
 
-function retrieve_review_By_Product_Id (db,product_id,callback){
+function retrieve_review_By_Product_Id (db,pid,callback){
     var collection = db.collection('reviews');
-    collection.findOne(product_id, function(err, result) {
+    collection.findOne({"product_id":pid}, function(err, result) {
             callback(result);
     });
 }

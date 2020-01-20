@@ -4,7 +4,7 @@ metadata:
   name: product-recommendation-service
 spec:
   selector:
-    app: product-recommendation-service-deployment
+    app: product-recommendation-service
   ports:
     - protocol: TCP
       port: 80

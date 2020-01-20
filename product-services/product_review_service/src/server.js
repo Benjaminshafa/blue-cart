@@ -34,8 +34,8 @@ app.post('/review',function(req,res){
 });
 
 app.get('/review',function(req,res){
-    controller.retrieve_review_By_Product_Id(mongodbConnection,req.header.product_id,function(product_reviews){
-        if(product_reviews.insertedCount < 1){
+    controller.retrieve_review_By_Product_Id(mongodbConnection,req.headers.product_id,function(product_reviews){
+        if(!product_reviews){
             return res.status(404).send({"message": "not found!"});        
         }
         else{
