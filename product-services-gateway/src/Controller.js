@@ -1,11 +1,11 @@
 require('dotenv').config()
 const axios = require('axios').default;
 
-const PRODUCT_INFO_SERVICE_ENDPOINT = "http://"+process.env["PRODUCT_INFO_SERVICE_ENDPOINT"]+"/product";
-const PRODUCT_RECOMMENDATION_SERVICE_ENDPOINT = "http://"+process.env["PRODUCT_RECOMMENDATION_SERVICE_ENDPOINT"]+"/recommendation";
-const PRODUCT_REVIEW_SERVICE_ENDPOINT = "http://"+process.env["PRODUCT_REVIEW_SERVICE_ENDPOINT"]+"/review";
-const PRODUCT_SHIPPING_SERVICE_ENDPOINT = "http://"+process.env["PRODUCT_SHIPPING_SERVICE_ENDPOINT"]+"/shipping";
-const PRODUCT_SHOPPING_CART_SERVICE_HOST = "http://"+process.env["PRODUCT_SHOPPING_CART_SERVICE_HOST"]+"/shopping_cart";
+const PRODUCT_INFO_SERVICE_ENDPOINT = "http://"+process.env["PRODUCT_INFO_SERVICE_SERVICE_SERVICE_HOST"]+"/product";
+const PRODUCT_RECOMMENDATION_SERVICE_ENDPOINT = "http://"+process.env["PRODUCT_RECOMMENDATION_SERVICE_SERVICE_HOST"]+"/recommendation";
+const PRODUCT_REVIEW_SERVICE_ENDPOINT = "http://"+process.env["PRODUCT_REVIEW_SERVICE_SERVICE_HOST"]+"/review";
+const PRODUCT_SHIPPING_SERVICE_ENDPOINT = "http://"+process.env["PRODUCT_SHIPPING_SERVICE_SERVICE_HOST"]+"/shipping";
+const PRODUCT_SHOPPING_CART_SERVICE_HOST = "http://"+process.env["PRODUCT_SHOPPING_CART_SERVICE_SERVICE_HOST"]+"/shopping_cart";
 
 function doTheMagic (product_id,customer_id,callback){
 

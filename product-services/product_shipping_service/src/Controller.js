@@ -1,10 +1,12 @@
 var mysql      = require('mysql');
-var connection = mysql.createConnection({
- host     : 'blue-cart.cgieg9vhodze.eu-central-1.rds.amazonaws.com',
- user     : 'blue_cart_admin',
- password : 'QwertyMan500',
-//  database : 'shipping-service'
+
+var pool  = mysql.createPool({
+  connectionLimit : 8,
+  host     : 'blue-cart.cgieg9vhodze.eu-central-1.rds.amazonaws.com',
+  user     : 'blue_cart_admin',
+  password : 'QwertyMan500',
 });
+
 
 function insert_shipping (shipping_object,callback){
     
@@ -24,19 +26,23 @@ connection.query(`INSERT INTO shipping.shipping (Id, Shipping_mode, Shipping_cos
 }
 
 function retrieve_shipping (callback){
-
-connection.connect(); 
-connection.query(`SELECT * from shipping.shipping`, function (error, results, fields) {
-  if (error){
-    throw error;
-    console.log('The solution is: ', results[0].solution);
-    connection.destroy();
+  pool.getConnection(function(err, connection) {
+    if(err){
+      console.log('The solution is: ', results[0].solution);
+      callback(err);
     }
     else{
-      connection.destroy();
-        callback(results)
+      connection.query(`SELECT * from shipping.shipping`, function (error, results, fields) {
+        if (error){
+          console.log('The solution is: ', results[0].solution);
+          callback(err);
+          }
+          else{
+            callback(results)
+          }
+      });
     }
-});
+  })
 }
 
 
