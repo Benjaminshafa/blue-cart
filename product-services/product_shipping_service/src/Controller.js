@@ -35,6 +35,7 @@ function retrieve_shipping (callback){
       connection.query(`SELECT * from shipping.shipping`, function (error, results, fields) {
         if (error){
           console.log('The solution is: ', results[0].solution);
+	  connection.release();
           callback(err);
           }
           else{
