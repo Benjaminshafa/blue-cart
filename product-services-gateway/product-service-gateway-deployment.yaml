@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: product-services-gateway
-        image: benjaminsh/product-services-gateway:v2
+        image: benjaminsh/product-services-gateway:latest
         ports:
         - containerPort: 3000
