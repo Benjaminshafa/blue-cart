@@ -1,7 +1,7 @@
 var mysql      = require('mysql');
 
 var pool  = mysql.createPool({
-  connectionLimit : 8,
+  connectionLimit : 10,
   host     : 'blue-cart.cgieg9vhodze.eu-central-1.rds.amazonaws.com',
   user     : 'blue_cart_admin',
   password : 'QwertyMan500',
@@ -19,7 +19,7 @@ connection.query(`INSERT INTO shipping.shipping (Id, Shipping_mode, Shipping_cos
     }
     else{
           connection.destroy();
-        callback(results)
+          callback(results)
     }
 });
 
@@ -35,10 +35,11 @@ function retrieve_shipping (callback){
       connection.query(`SELECT * from shipping.shipping`, function (error, results, fields) {
         if (error){
           console.log('The solution is: ', results[0].solution);
-	  connection.release();
+	        connection.release();
           callback(err);
           }
           else{
+            connection.release();
             callback(results)
           }
       });
