@@ -27,7 +27,7 @@ app.get('/shipping',function(req,res){
             return res.status(404).send({"message": "not found!"});        
         }
         else{
-             return res.status(200).send({shippingList});        
+             return res.status(200).send({ShippingList: shippingList});        
         }
     })
 });

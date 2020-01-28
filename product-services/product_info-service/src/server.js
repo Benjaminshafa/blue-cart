@@ -1,5 +1,6 @@
 // for configuring web server on express.
 const express = require('express')
+var responseTime = require('response-time')
 const app = express()
 const port = 3000;
 app.use(express.json());
@@ -33,13 +34,14 @@ app.post('/product',function(req,res){
     })
 });
 
-app.get('/product',function(req,res){
+app.get('/product',function(req,res,time){
     controller.retrieve_Product_By_Id(mongodbConnection,req.header.id,function(product_Info){
         if(product_Info.insertedCount < 1){
             return res.status(404).send({"message": "not found!"});        
         }
         else{
-             return res.status(200).send({product_Info});        
+            console.log(time);
+             return res.status(200).send({productInfo: product_Info});        
         }
     })
 });

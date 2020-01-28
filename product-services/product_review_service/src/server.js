@@ -39,7 +39,7 @@ app.get('/review',function(req,res){
             return res.status(404).send({"message": "not found!"});        
         }
         else{
-             return res.status(200).send(product_reviews);        
+             return res.status(200).send({Product_Review: product_reviews});        
         }
     })
 });
