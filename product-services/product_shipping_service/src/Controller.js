@@ -1,10 +1,11 @@
 var mysql      = require('mysql');
+require('dotenv').config();
 
 var pool  = mysql.createPool({
   connectionLimit : 8,
-  host     : 'blue-cart.cgieg9vhodze.eu-central-1.rds.amazonaws.com',
-  user     : 'blue_cart_admin',
-  password : 'QwertyMan500',
+  host     : process.env.MYSQL_DB_HOST,
+  user     : process.env.MYSQL_DB_USERNAME,
+  password : process.env.MYSQL_DB_PASSWORD,
 });
 
 
