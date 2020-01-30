@@ -1,5 +1,6 @@
 // for configuring web server on express.
 const express = require('express')
+var responseTime = require('response-time')
 const app = express()
 const port = 3000;
 app.use(express.json());
@@ -41,7 +42,7 @@ app.get('/product',function(req,res){
             return res.status(404).send({"message": "not found!"});        
         }
         else{
-             return res.status(200).send({product_Info});        
+             return res.status(200).send({productInfo: product_Info});        
         }
     })
 });

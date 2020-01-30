@@ -40,7 +40,7 @@ app.get('/recommendation',function(req,res){
             return res.status(404).send({"message": "not found!"});        
         }
         else{
-             return res.status(200).send(recomendation_list);        
+             return res.status(200).send({Recommendation_List: recomendation_list});        
         }
     })
 });

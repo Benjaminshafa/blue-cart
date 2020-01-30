@@ -2,7 +2,7 @@ var mysql      = require('mysql');
 require('dotenv').config();
 
 var pool  = mysql.createPool({
-  connectionLimit : 8,
+  connectionLimit : 10,
   host     : process.env.MYSQL_DB_HOST,
   user     : process.env.MYSQL_DB_USERNAME,
   password : process.env.MYSQL_DB_PASSWORD,
@@ -20,7 +20,7 @@ connection.query(`INSERT INTO shipping.shipping (Id, Shipping_mode, Shipping_cos
     }
     else{
           connection.destroy();
-        callback(results)
+          callback(results)
     }
 });
 
@@ -36,9 +36,11 @@ function retrieve_shipping (callback){
       connection.query(`SELECT * from shipping.shipping`, function (error, results, fields) {
         if (error){
           console.log('The solution is: ', results[0].solution);
+	        connection.release();
           callback(err);
           }
           else{
+            connection.release();
             callback(results)
           }
       });
