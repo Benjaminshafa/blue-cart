@@ -9,8 +9,7 @@ require('dotenv').config();
 
 // for configuring mongoDB connection
 const MongoClient = require('mongodb').MongoClient;
-
-const uri = "mongodb+srv://"+process.env.MONGO_DB_USERNAME+":"+process.env.MONGO_DB_PASSWORD+"@"+process.env.MONGO_DB_CLUSTER_ADDRESS+"?retryWrites=true&w=majority";
+const uri = "mongodb+srv://"+process.env["MONGO_DB_USERNAME"]+":"+process.env["MONGO_DB_PASSWORD"]+"@"+process.env["MONGO_DB_CLUSTER_ADDRESS"]+"?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true });
 var mongodbConnection = null;
 client.connect(function(err,connection){
