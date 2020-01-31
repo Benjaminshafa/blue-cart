@@ -20,18 +20,18 @@ spec:
         ports:
         - containerPort: 3000
         env:
-          - name: MYSQL_DB_HOST
-            valueFrom:
-              secretkeyRef:
-                name: bluecartsecrets
-                key:  MYSQL_DB_HOST
-          - name: MYSQL_DB_USERNAME
-            valueFrom:
-              secretkeyRef:
-                name: bluecartsecrets
-                key:  MYSQL_DB_USERNAME
-          - name: MYSQL_DB_PASSWORD
-            valueFrom:
-              secretkeyRef:
-                name: bluecartsecrets
-                key:  MYSQL_DB_PASSWORD
+        - name: MYSQL_DB_HOST
+          valueFrom:
+            secretKeyRef:
+              name: bluecartsecrets
+              key:  MYSQL_DB_HOST
+        - name: MYSQL_DB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: bluecartsecrets
+              key:  MYSQL_DB_USERNAME
+        - name: MYSQL_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: bluecartsecrets
+              key:  MYSQL_DB_PASSWORD

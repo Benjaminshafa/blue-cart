@@ -22,16 +22,16 @@ spec:
         env:
           - name: MONGO_DB_USERNAME
             valueFrom:
-              secretkeyRef:
+              secretKeyRef:
                 name: bluecartsecrets
                 key:  MONGO_DB_USERNAME
           - name: MONGO_DB_USERNAME
             valueFrom:
-              secretkeyRef:
+              secretKeyRef:
                 name: bluecartsecrets
                 key:  MONGO_DB_PASSWORD
           - name: MONGO_DB_PASSWORD
             valueFrom:
-              secretkeyRef:
+              secretKeyRef:
                 name: bluecartsecrets
                 key:  MONGO_DB_CLUSTER_ADDRESS
