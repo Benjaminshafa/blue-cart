@@ -1,8 +1,6 @@
 require('dotenv').config()
 const axios = require('axios').default;
 
-var SumOfTimeElapsed = 0;
-
 const PRODUCT_INFO_SERVICE_ENDPOINT = "http://"+process.env["PRODUCT_INFO_SERVICE_SERVICE_SERVICE_HOST"]+"/product";
 const PRODUCT_RECOMMENDATION_SERVICE_ENDPOINT = "http://"+process.env["PRODUCT_RECOMMENDATION_SERVICE_SERVICE_HOST"]+"/recommendation";
 const PRODUCT_REVIEW_SERVICE_ENDPOINT = "http://"+process.env["PRODUCT_REVIEW_SERVICE_SERVICE_HOST"]+"/review";
@@ -19,7 +17,6 @@ function doTheMagic (product_id,customer_id,callback){
         getProductShoppingCartService(customer_id)
     ])
     .then(function(results){
-        results.totalTimeElapsedOfAllServicesCall = SumOfTimeElapsed;
         callback(results);        
     })
     .catch(function(err){
@@ -37,8 +34,6 @@ function getProductInfo (pid){
             var totalElapsedTime = hrend[0] * 1000 + hrend[1] / 1000000
             console.log('Product Info took '+ totalElapsedTime);
             response.data.totalElapsedTime = totalElapsedTime;
-            SumOfTimeElapsed+= totalElapsedTime;
-
             resolve(response.data);
         })
         .catch(err => {
@@ -55,10 +50,8 @@ function getProductRecommendationService(pid){
 
             var hrend = process.hrtime(hrstart);
             var totalElapsedTime = hrend[0] * 1000 + hrend[1] / 1000000
-            console.log('Product Info took '+ totalElapsedTime);
+            console.log('Product Recommendation took '+ totalElapsedTime);
             response.data.totalElapsedTime = totalElapsedTime;
-            SumOfTimeElapsed+= totalElapsedTime;
-
             resolve(response.data);
         })
         .catch(err =>{
@@ -75,10 +68,8 @@ function getProductReviewService(pid){
 
             var hrend = process.hrtime(hrstart);
             var totalElapsedTime = hrend[0] * 1000 + hrend[1] / 1000000
-            console.log('Product Info took '+ totalElapsedTime);
+            console.log('Product Review took '+ totalElapsedTime);
             response.data.totalElapsedTime = totalElapsedTime;
-            SumOfTimeElapsed+= totalElapsedTime;
-
             resolve(response.data);
         })
         .catch(err =>{
@@ -95,10 +86,8 @@ function getProductShippingService(pid){
 
             var hrend = process.hrtime(hrstart);
             var totalElapsedTime = hrend[0] * 1000 + hrend[1] / 1000000
-            console.log('Product Info took '+ totalElapsedTime);
+            console.log('Product Shipping took '+ totalElapsedTime);
             response.data.totalElapsedTime = totalElapsedTime;
-            SumOfTimeElapsed+= totalElapsedTime;
-
             resolve(response.data);
         })
         .catch(err =>{
@@ -115,10 +104,8 @@ function getProductShoppingCartService(cid){
             
             var hrend = process.hrtime(hrstart);
             var totalElapsedTime = hrend[0] * 1000 + hrend[1] / 1000000
-            console.log('Product Info took '+ totalElapsedTime);
+            console.log('Product ShoppingCart took '+ totalElapsedTime);
             response.data.totalElapsedTime = totalElapsedTime;
-            SumOfTimeElapsed+= totalElapsedTime;
-
             resolve(response.data);
         })
         .catch(err =>{
