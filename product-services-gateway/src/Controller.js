@@ -1,7 +1,7 @@
 require('dotenv').config()
 const axios = require('axios').default;
 
-const Stopwatch = require('statman-stopwatch');
+var SumOfTimeElapsed = 0;
 
 const PRODUCT_INFO_SERVICE_ENDPOINT = "http://"+process.env["PRODUCT_INFO_SERVICE_SERVICE_SERVICE_HOST"]+"/product";
 const PRODUCT_RECOMMENDATION_SERVICE_ENDPOINT = "http://"+process.env["PRODUCT_RECOMMENDATION_SERVICE_SERVICE_HOST"]+"/recommendation";
@@ -19,6 +19,7 @@ function doTheMagic (product_id,customer_id,callback){
         getProductShoppingCartService(customer_id)
     ])
     .then(function(results){
+        results.totalTimeElapsedOfAllServicesCall = SumOfTimeElapsed;
         callback(results);        
     })
     .catch(function(err){
@@ -29,11 +30,16 @@ function doTheMagic (product_id,customer_id,callback){
 
 function getProductInfo (pid){
     return new Promise(function(resolve,reject){
-        const sw = new Stopwatch(true);
+        var hrstart = process.hrtime();
         axios.get(PRODUCT_INFO_SERVICE_ENDPOINT, {headers: {"product_id" : pid}})
         .then(response => {
-            sw.stop();
-            resolve(response.data,sw.read());
+            var hrend = process.hrtime(hrstart);
+            var totalElapsedTime = hrend[0] * 1000 + hrend[1] / 1000000
+            console.log('Product Info took '+ totalElapsedTime);
+            response.data.totalElapsedTime = totalElapsedTime;
+            SumOfTimeElapsed+= totalElapsedTime;
+
+            resolve(response.data);
         })
         .catch(err => {
             reject(err);
@@ -43,11 +49,17 @@ function getProductInfo (pid){
 
 function getProductRecommendationService(pid){
     return new Promise(function(resolve,reject){
-        const sw = new Stopwatch(true);
+        var hrstart = process.hrtime();
         axios.get(PRODUCT_RECOMMENDATION_SERVICE_ENDPOINT,{headers: {"product_id": pid}})
         .then(response =>{
-            sw.stop();
-            resolve(response.data,sw.read());
+
+            var hrend = process.hrtime(hrstart);
+            var totalElapsedTime = hrend[0] * 1000 + hrend[1] / 1000000
+            console.log('Product Info took '+ totalElapsedTime);
+            response.data.totalElapsedTime = totalElapsedTime;
+            SumOfTimeElapsed+= totalElapsedTime;
+
+            resolve(response.data);
         })
         .catch(err =>{
             reject(err);
@@ -57,11 +69,17 @@ function getProductRecommendationService(pid){
 
 function getProductReviewService(pid){
     return new Promise(function(resolve,reject){
-        const sw = new Stopwatch(true);
+        var hrstart = process.hrtime();
         axios.get(PRODUCT_REVIEW_SERVICE_ENDPOINT,{headers: {"product_id": pid}})
         .then(response =>{
-            sw.stop();
-            resolve(response.data,sw.read());
+
+            var hrend = process.hrtime(hrstart);
+            var totalElapsedTime = hrend[0] * 1000 + hrend[1] / 1000000
+            console.log('Product Info took '+ totalElapsedTime);
+            response.data.totalElapsedTime = totalElapsedTime;
+            SumOfTimeElapsed+= totalElapsedTime;
+
+            resolve(response.data);
         })
         .catch(err =>{
             reject(err);
@@ -71,11 +89,17 @@ function getProductReviewService(pid){
 
 function getProductShippingService(pid){
     return new Promise(function(resolve,reject){
-        const sw = new Stopwatch(true);
+        var hrstart = process.hrtime();
         axios.get(PRODUCT_SHIPPING_SERVICE_ENDPOINT)
         .then(response =>{
-            sw.stop();
-            resolve(response.data,sw.read());
+
+            var hrend = process.hrtime(hrstart);
+            var totalElapsedTime = hrend[0] * 1000 + hrend[1] / 1000000
+            console.log('Product Info took '+ totalElapsedTime);
+            response.data.totalElapsedTime = totalElapsedTime;
+            SumOfTimeElapsed+= totalElapsedTime;
+
+            resolve(response.data);
         })
         .catch(err =>{
             reject(err);
@@ -85,11 +109,17 @@ function getProductShippingService(pid){
 
 function getProductShoppingCartService(cid){
     return new Promise(function(resolve,reject){
-        const sw = new Stopwatch(true);
+        var hrstart = process.hrtime();
         axios.get(PRODUCT_SHOPPING_CART_SERVICE_HOST,{headers: {"customer_id": cid}})
         .then(response =>{
-            sw.stop();
-            resolve(response.data,sw.read());
+            
+            var hrend = process.hrtime(hrstart);
+            var totalElapsedTime = hrend[0] * 1000 + hrend[1] / 1000000
+            console.log('Product Info took '+ totalElapsedTime);
+            response.data.totalElapsedTime = totalElapsedTime;
+            SumOfTimeElapsed+= totalElapsedTime;
+
+            resolve(response.data);
         })
         .catch(err =>{
             reject(err);
