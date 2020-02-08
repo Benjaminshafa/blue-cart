@@ -9,3 +9,5 @@ node_modules/
 *.env
 
 k8-deployments/bluecartsecrets.yaml
+
+/secret.txt
