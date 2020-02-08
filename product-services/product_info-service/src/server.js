@@ -38,7 +38,7 @@ app.post('/product',function(req,res){
 
 app.get('/product',function(req,res){
     controller.retrieve_Product_By_Id(mongodbConnection,req.header.id,function(product_Info){
-        if(product_Info.insertedCount < 1){
+        if(!product_Info){
             return res.status(404).send({"message": "not found!"});        
         }
         else{
