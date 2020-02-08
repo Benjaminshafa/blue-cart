@@ -9,6 +9,12 @@ require('dotenv').config();
 
 // for configuring mongoDB connection
 const MongoClient = require('mongodb').MongoClient;
+console.log("the mongo username is :"+ process.env["MONGO_DB_USERNAME"]);
+
+console.log("the mongo password is :"+ process.env["MONGO_DB_PASSWORD"]);
+
+console.log("the mongo cluster is :"+ process.env["MONGO_DB_CLUSTER_ADDRESS"]);
+
 const uri = "mongodb+srv://"+process.env["MONGO_DB_USERNAME"]+":"+process.env["MONGO_DB_PASSWORD"]+"@"+process.env["MONGO_DB_CLUSTER_ADDRESS"]+"?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true });
 var mongodbConnection = null;
