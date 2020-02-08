@@ -5,7 +5,7 @@ metadata:
   labels:
     app: product-services-gateway
 spec:
-  replicas: 5
+  replicas: 1
   selector:
     matchLabels:
       app: product-services-gateway
@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: product-services-gateway
-        image: benjaminsh/product-services-gateway:latest
+        image: benjaminsh/blue-cart-product-services-gateway:latest
         ports:
         - containerPort: 3000
