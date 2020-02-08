@@ -8,6 +8,7 @@ require('dotenv').config();
 
 // for configuring mongoDB connection
 const MongoClient = require('mongodb').MongoClient;
+
 const uri = "mongodb+srv://"+process.env["MONGO_DB_USERNAME"]+":"+process.env["MONGO_DB_PASSWORD"]+"@"+process.env["MONGO_DB_CLUSTER_ADDRESS"]+"?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true });
 var mongodbConnection = null;
@@ -40,7 +41,20 @@ app.get('/review',function(req,res){
             return res.status(404).send({"message": "not found!"});        
         }
         else{
-             return res.status(200).send({Product_Review: product_reviews});        
+            var message = {
+                productid: '',
+                reviewlist: []
+            };
+            message.productid = product_reviews[0].product_id;
+            product_reviews.forEach(element => {
+                var reviewlistObject = {}
+                reviewlistObject.customer_id = element.customer_Id;
+                reviewlistObject.star_rating = element.star_rating;
+                reviewlistObject.review_description = element.review_description;
+                message.reviewlist.push(reviewlistObject);
+            });
+
+             return res.status(200).send({Product_Review: message});        
         }
     })
 });

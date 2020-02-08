@@ -8,6 +8,7 @@ require('dotenv').config();
 
 // for configuring mongoDB connection
 const MongoClient = require('mongodb').MongoClient;
+
 const uri = "mongodb+srv://"+process.env["MONGO_DB_USERNAME"]+":"+process.env["MONGO_DB_PASSWORD"]+"@"+process.env["MONGO_DB_CLUSTER_ADDRESS"]+"?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true });
 var mongodbConnection = null;
@@ -40,7 +41,20 @@ app.get('/shopping_cart',function(req,res){
             return res.status(404).send({"message": "not found!"});        
         }
         else{
-             return res.status(200).send({Shopping_Cart: result});        
+            var message = {
+                customer_id : '',
+                cartitemlist : []
+            };
+    
+            message.customer_id = result.customer_Id;
+            result.cart_items.forEach(element => {
+                var tempObj = {};
+                tempObj.product_id = element.product_Id;
+                tempObj.quantity = element.Quantity;
+                message.cartitemlist.push(tempObj);
+            });
+
+             return res.status(200).send({Shopping_Cart: message});        
         }
     })
 });

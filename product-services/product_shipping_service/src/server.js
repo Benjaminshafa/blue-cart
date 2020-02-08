@@ -27,7 +27,20 @@ app.get('/shipping',function(req,res){
             return res.status(404).send({"message": "not found!"});        
         }
         else{
-             return res.status(200).send({ShippingList: shippingList});        
+
+            var message = {
+                shippinglist: []
+              };
+              shippingList.forEach(element => {
+                var temp_obj = {};
+                temp_obj.id = element.Id;
+                temp_obj.shippingmode = element.Shipping_mode;
+                temp_obj.cost = element.Shipping_cost;
+                temp_obj.duration = element.Shipping_duration;
+                message.shippinglist.push(temp_obj);
+              });
+
+             return res.status(200).send({ShippingList: message});        
         }
     })
 });

@@ -6,9 +6,16 @@ function insert_review (db,review_Object,callback){
 }
 
 function retrieve_review_By_Product_Id (db,pid,callback){
-    var collection = db.collection('reviews');
-    collection.findOne({"product_id":pid}, function(err, result) {
+    
+    db.collection('reviews').find({"product_id":pid}).toArray(function(err,result){
+        if(err){
+            console.log(err);
+            callback(err);
+        }
+        else{
+            console.log(result);
             callback(result);
+        }
     });
 }
 
