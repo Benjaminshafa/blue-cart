@@ -11,12 +11,18 @@ app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 var controller = require('./Controller');
 
 app.get('/product_service_proxy',function(req,res){
+    var hrstart = process.hrtime();
+
     controller.doTheMagic(req.headers.product_id,req.headers.customer_id,function(result){
         if(!result){
             return res.status(404).send({"message": "not found!"});        
         }
         else{
-             return res.status(200).send({result});        
+            var hrend = process.hrtime(hrstart);
+            var totalAPICallElapsedTime = hrend[0] * 1000 + hrend[1] / 1000000
+            console.log('The API call took '+ totalAPICallElapsedTime);
+
+             return res.status(200).send({result,totalRESTCallBetweenServices: result.totalTimeElapsedOfAllServicesCall, GatewayCallDuration: totalAPICallElapsedTime});        
         }
     })
 });
