@@ -20,8 +20,8 @@ app.get('/product_service_proxy',function(req,res){
             var hrend = process.hrtime(hrstart);
             var totalAPICallElapsedTime = hrend[0] * 1000 + hrend[1] / 1000000
             console.log('The API call took '+ totalAPICallElapsedTime);
-
-             return res.status(200).send({result,Total_Inter_Services_Call_On_REST_took: totalAPICallElapsedTime});        
+            var totalAPICallElapsedTimeInSecond = ((totalAPICallElapsedTime % 60000) / 1000).toFixed(0);
+             return res.status(200).send({result,Total_Services_Call_In_REST_took: totalAPICallElapsedTime,Total_Services_Call_On_REST_Per_Second:totalAPICallElapsedTimeInSecond});        
         }
     })
 });
