@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.1",
+    "convert-hrtime": "^3.0.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "i": "^0.3.6",

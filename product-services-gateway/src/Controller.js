@@ -1,4 +1,7 @@
 require('dotenv').config()
+
+const convertHrtime = require('convert-hrtime');
+
 const axios = require('axios').default;
 
 const PRODUCT_INFO_SERVICE_ENDPOINT = "http://"+process.env["PRODUCT_INFO_SERVICE_SERVICE_SERVICE_HOST"]+"/product";
@@ -31,9 +34,8 @@ function getProductInfo (pid){
         axios.get(PRODUCT_INFO_SERVICE_ENDPOINT, {headers: {"product_id" : pid}})
         .then(response => {
             var hrend = process.hrtime(hrstart);
-            var totalElapsedTime = hrend[0] * 1000 + hrend[1] / 1000000
-            console.log('Product Info took '+ totalElapsedTime);
-            response.data.product_info_call_duration = totalElapsedTime;
+            var timer = convertHrtime(hrend);
+            response.data.product_info_call_duration = timer.seconds;
             resolve(response.data);
         })
         .catch(err => {
@@ -49,9 +51,8 @@ function getProductRecommendationService(pid){
         .then(response =>{
 
             var hrend = process.hrtime(hrstart);
-            var totalElapsedTime = hrend[0] * 1000 + hrend[1] / 1000000
-            console.log('Product Recommendation took '+ totalElapsedTime);
-            response.data.product_recommendation_call_duration = totalElapsedTime;
+            var timer = convertHrtime(hrend);
+            response.data.product_recommendation_call_duration = timer.seconds;
             resolve(response.data);
         })
         .catch(err =>{
@@ -67,9 +68,8 @@ function getProductReviewService(pid){
         .then(response =>{
 
             var hrend = process.hrtime(hrstart);
-            var totalElapsedTime = hrend[0] * 1000 + hrend[1] / 1000000
-            console.log('Product Review took '+ totalElapsedTime);
-            response.data.product_review_call_duration = totalElapsedTime;
+            var timer = convertHrtime(hrend);
+            response.data.product_review_call_duration = timer.seconds;
             resolve(response.data);
         })
         .catch(err =>{
@@ -85,9 +85,8 @@ function getProductShippingService(pid){
         .then(response =>{
 
             var hrend = process.hrtime(hrstart);
-            var totalElapsedTime = hrend[0] * 1000 + hrend[1] / 1000000
-            console.log('Product Shipping took '+ totalElapsedTime);
-            response.data.product_shipping_call_duration = totalElapsedTime;
+            var timer = convertHrtime(hrend);
+            response.data.product_shipping_call_duration = timer.seconds;
             resolve(response.data);
         })
         .catch(err =>{
@@ -103,9 +102,8 @@ function getProductShoppingCartService(cid){
         .then(response =>{
             
             var hrend = process.hrtime(hrstart);
-            var totalElapsedTime = hrend[0] * 1000 + hrend[1] / 1000000
-            console.log('Product ShoppingCart took '+ totalElapsedTime);
-            response.data.product_shopping_call_duration = totalElapsedTime;
+            var timer = convertHrtime(hrend);
+            response.data.product_shopping_call_duration = timer.seconds;
             resolve(response.data);
         })
         .catch(err =>{

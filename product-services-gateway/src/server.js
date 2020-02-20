@@ -5,6 +5,7 @@ const port = 3000;
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
+const convertHrtime = require('convert-hrtime');
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
@@ -18,9 +19,8 @@ app.get('/product_service_proxy',function(req,res){
         }
         else{
             var hrend = process.hrtime(hrstart);
-            var totalAPICallElapsedTime = hrend[0] * 1000 + hrend[1] / 1000000
-            console.log('The API call took '+ totalAPICallElapsedTime);
-             return res.status(200).send({result,Duration: totalAPICallElapsedTime});        
+            var timer = convertHrtime(hrend);
+             return res.status(200).send({result,Duration: timer.seconds});        
         }
     })
 });
