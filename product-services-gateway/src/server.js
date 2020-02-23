@@ -20,7 +20,7 @@ app.get('/product_service_proxy',function(req,res){
         else{
             var hrend = process.hrtime(hrstart);
             var timer = convertHrtime(hrend);
-             return res.status(200).send({result,Duration: timer.seconds});        
+             return res.status(200).send({result,Duration: timer.milliseconds});        
         }
     })
 });

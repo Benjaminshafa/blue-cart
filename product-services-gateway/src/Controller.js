@@ -35,7 +35,7 @@ function getProductInfo (pid){
         .then(response => {
             var hrend = process.hrtime(hrstart);
             var timer = convertHrtime(hrend);
-            response.data.product_info_call_duration = timer.seconds;
+            response.data.product_info_call_duration = timer.milliseconds;
             resolve(response.data);
         })
         .catch(err => {
@@ -52,7 +52,7 @@ function getProductRecommendationService(pid){
 
             var hrend = process.hrtime(hrstart);
             var timer = convertHrtime(hrend);
-            response.data.product_recommendation_call_duration = timer.seconds;
+            response.data.product_recommendation_call_duration = timer.milliseconds;
             resolve(response.data);
         })
         .catch(err =>{
@@ -69,7 +69,7 @@ function getProductReviewService(pid){
 
             var hrend = process.hrtime(hrstart);
             var timer = convertHrtime(hrend);
-            response.data.product_review_call_duration = timer.seconds;
+            response.data.product_review_call_duration = timer.milliseconds;
             resolve(response.data);
         })
         .catch(err =>{
@@ -86,7 +86,7 @@ function getProductShippingService(pid){
 
             var hrend = process.hrtime(hrstart);
             var timer = convertHrtime(hrend);
-            response.data.product_shipping_call_duration = timer.seconds;
+            response.data.product_shipping_call_duration = timer.milliseconds;
             resolve(response.data);
         })
         .catch(err =>{
@@ -103,7 +103,7 @@ function getProductShoppingCartService(cid){
             
             var hrend = process.hrtime(hrstart);
             var timer = convertHrtime(hrend);
-            response.data.product_shopping_call_duration = timer.seconds;
+            response.data.product_shopping_call_duration = timer.milliseconds;
             resolve(response.data);
         })
         .catch(err =>{
