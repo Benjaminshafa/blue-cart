@@ -103,7 +103,7 @@ function getProductShoppingCartService(cid){
             
             var hrend = process.hrtime(hrstart);
             var timer = convertHrtime(hrend);
-            response.data.product_shopping_call_duration = timer.milliseconds;
+            response.data.customer_shopping_cart_call_duration = timer.milliseconds;
             resolve(response.data);
         })
         .catch(err =>{
