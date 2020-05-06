@@ -10,19 +10,24 @@ var pool  = mysql.createPool({
 
 
 function insert_shipping (shipping_object,callback){
-    
-connection.connect();
- 
-connection.query(`INSERT INTO shipping.shipping (Id, Shipping_mode, Shipping_cost, Shipping_duration) VALUES (UUID(), 'express',6,2)`, function (error, results, fields) {
-  if (error){
-    throw error;
-    console.log('The solution is: ', results[0].solution);
-    }
-    else{
-          connection.destroy();
-          callback(results)
-    }
-});
+
+    pool.getConnection((err, connection)=>{
+      if(err){
+        console.log(err);
+      }
+      else{
+        connection.query(`INSERT INTO shipping.shipping (Id, Shipping_mode, Shipping_cost, Shipping_duration) VALUES (UUID(), 'lousy',1,10)`, function (error, results, fields) {
+          if (error){
+            throw error;
+            console.log('The solution is: ', results[0].solution);
+            }
+            else{
+                  connection.destroy();
+                  callback(results)
+            }
+        });
+      }
+    }) 
 
 }
 
