@@ -10,4 +10,4 @@ node_modules/
 
 k8-deployments/bluecartsecrets.yaml
 
-/secret.txt
+/secret.txtproduct-services/product_info-service/Dockerfile
